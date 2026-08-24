@@ -123,61 +123,120 @@ const handleLogout = () => {
 .profile-button {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  padding: 0.5rem 0.875rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
   font-family: inherit;
 }
 
 .profile-button:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--surface-hover);
+}
+
+.profile-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-  color: white;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--accent) 0%, #1e40af 100%);
+  color: var(--text-inverse);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
   font-size: 0.75rem;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.02em;
 }
 
 .profile-name {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--text-primary);
+  white-space: nowrap;
 }
 
 .chevron {
-  color: #64748b;
+  margin-left: auto;
+  color: var(--text-muted);
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .chevron-open {
   transform: rotate(180deg);
 }
 
+/* Opens upward — the menu now sits at the bottom of the sidebar */
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
+  bottom: calc(100% + var(--space-2));
+  left: 0;
   min-width: 280px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   z-index: 1000;
   overflow: hidden;
+}
+
+/* Icons-only mode. The `collapsed` class lives on the shell, outside this
+   component's scope, so these selectors must be fully global — a bare
+   :global(.x) prefix on a descendant selector compiles incorrectly. */
+:global(.sidebar.collapsed .profile-button) {
+  justify-content: center;
+}
+
+:global(.sidebar.collapsed .profile-name),
+:global(.sidebar.collapsed .chevron) {
+  display: none;
+}
+
+:global(.sidebar.collapsed .dropdown-menu) {
+  left: calc(100% + var(--space-2));
+  bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  :global(.sidebar .profile-button) {
+    justify-content: center;
+  }
+
+  :global(.sidebar .profile-name),
+  :global(.sidebar .chevron) {
+    display: none;
+  }
+
+  :global(.sidebar .dropdown-menu) {
+    left: calc(100% + var(--space-2));
+    bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  :global(.sidebar .profile-button) {
+    justify-content: flex-start;
+  }
+
+  :global(.sidebar .profile-name),
+  :global(.sidebar .chevron) {
+    display: block;
+  }
+
+  :global(.sidebar .dropdown-menu) {
+    left: 0;
+    bottom: calc(100% + var(--space-2));
+  }
 }
 
 .dropdown-header {

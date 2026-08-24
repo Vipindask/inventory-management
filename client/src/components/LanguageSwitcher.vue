@@ -96,34 +96,41 @@ const selectLanguage = (locale) => {
 .language-button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.875rem;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
   font-family: inherit;
   font-size: 0.875rem;
-  color: #334155;
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 .language-button:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.language-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 .globe-icon {
-  color: #64748b;
   flex-shrink: 0;
 }
 
 .language-label {
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .chevron {
-  color: #64748b;
+  margin-left: auto;
   transition: transform 0.2s ease;
   flex-shrink: 0;
 }
@@ -132,15 +139,16 @@ const selectLanguage = (locale) => {
   transform: rotate(180deg);
 }
 
+/* Opens upward — the switcher now sits at the bottom of the sidebar */
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 0.5rem);
-  right: 0;
-  min-width: 160px;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  bottom: calc(100% + var(--space-2));
+  left: 0;
+  min-width: 180px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   z-index: 1000;
   overflow: hidden;
 }
@@ -150,8 +158,8 @@ const selectLanguage = (locale) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
   background: none;
   border: none;
   text-align: left;
@@ -160,16 +168,16 @@ const selectLanguage = (locale) => {
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #334155;
+  color: var(--text-body);
 }
 
 .dropdown-item:hover {
-  background: #f8fafc;
+  background: var(--surface-hover);
 }
 
 .dropdown-item.active {
-  background: #eff6ff;
-  color: #2563eb;
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 .language-name {
@@ -177,7 +185,57 @@ const selectLanguage = (locale) => {
 }
 
 .check-icon {
-  color: #2563eb;
+  color: var(--accent);
   flex-shrink: 0;
+}
+
+/* Icons-only mode. The `collapsed` class lives on the shell, outside this
+   component's scope, so these selectors must be fully global — a bare
+   :global(.x) prefix on a descendant selector compiles incorrectly. */
+:global(.sidebar.collapsed .language-button) {
+  justify-content: center;
+}
+
+:global(.sidebar.collapsed .language-label),
+:global(.sidebar.collapsed .chevron) {
+  display: none;
+}
+
+:global(.sidebar.collapsed .dropdown-menu) {
+  left: calc(100% + var(--space-2));
+  bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  :global(.sidebar .language-button) {
+    justify-content: center;
+  }
+
+  :global(.sidebar .language-label),
+  :global(.sidebar .chevron) {
+    display: none;
+  }
+
+  :global(.sidebar .dropdown-menu) {
+    left: calc(100% + var(--space-2));
+    bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile drawer is full width — restore the label */
+  :global(.sidebar .language-button) {
+    justify-content: flex-start;
+  }
+
+  :global(.sidebar .language-label),
+  :global(.sidebar .chevron) {
+    display: block;
+  }
+
+  :global(.sidebar .dropdown-menu) {
+    left: 0;
+    bottom: calc(100% + var(--space-2));
+  }
 }
 </style>

@@ -135,13 +135,13 @@ const formatDate = (dateString) => {
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  padding: 1rem;
+  padding: var(--space-4);
 }
 
 .modal-container {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   max-width: 700px;
   width: 100%;
   max-height: 90vh;
@@ -154,59 +154,64 @@ const formatDate = (dateString) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--border);
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
   letter-spacing: -0.025em;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
-  padding: 0.5rem;
+  padding: var(--space-2);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
-  transition: all 0.15s ease;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
 }
 
 .close-button:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.close-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 .modal-body {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem;
+  padding: var(--space-8);
 }
 
 .shortage-header {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
-  margin-bottom: 1.5rem;
+  gap: var(--space-5);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-6);
 }
 
 .shortage-icon {
   width: 64px;
   height: 64px;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  border-radius: 12px;
+  background: var(--danger);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--text-inverse);
   flex-shrink: 0;
 }
 
@@ -218,19 +223,19 @@ const formatDate = (dateString) => {
 .item-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2) 0;
 }
 
 .item-sku {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--text-muted);
   font-family: 'Monaco', 'Courier New', monospace;
 }
 
 .priority-badge {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -256,24 +261,24 @@ const formatDate = (dateString) => {
 .shortage-summary {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
 }
 
 .summary-card {
-  padding: 1.25rem;
-  border-radius: 10px;
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
   border: 2px solid;
 }
 
 .summary-card.danger {
   border-color: #fecaca;
-  background: #fef2f2;
+  background: var(--danger-soft);
 }
 
 .summary-card.warning {
   border-color: #fed7aa;
-  background: #fffbeb;
+  background: var(--warning-soft);
 }
 
 .summary-label {
@@ -281,34 +286,34 @@ const formatDate = (dateString) => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
-  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
 }
 
 .summary-value {
   font-size: 1.875rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .summary-card.danger .summary-value {
-  color: #dc2626;
+  color: var(--danger);
 }
 
 .summary-card.warning .summary-value {
-  color: #f59e0b;
+  color: var(--warning);
 }
 
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  gap: var(--space-6);
 }
 
 .info-item {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .info-label {
@@ -316,45 +321,50 @@ const formatDate = (dateString) => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .info-value {
   font-size: 0.938rem;
-  color: #0f172a;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
 .info-value.order-id,
 .info-value.sku {
   font-family: 'Monaco', 'Courier New', monospace;
-  color: #2563eb;
+  color: var(--accent);
 }
 
 .modal-footer {
-  padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  padding: var(--space-6);
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: flex-end;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 
 .btn-secondary {
-  padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  padding: var(--space-3) var(--space-5);
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   font-weight: 500;
   font-size: 0.875rem;
-  color: #334155;
+  color: var(--text-body);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: var(--transition);
   font-family: inherit;
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
-  border-color: #cbd5e1;
+  background: var(--border);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 /* Modal transition animations */
